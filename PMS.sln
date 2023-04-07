@@ -15,13 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS.Application", "PMS.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMS.Api", "PMS.Api\PMS.Api.csproj", "{ED351444-3FF6-4F1D-89FC-95AA9474775E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{ECC5CB80-FAF2-4C16-A71C-22BEF1BC72D2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Weather", "Weather", "{EB9BF502-2DE1-47EC-9C67-B89C25578A9F}"
-	ProjectSection(SolutionItems) = preProject
-		GetForecasts.http = GetForecasts.http
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{C2A74A89-96F5-4B47-8D81-626C162FEAEE}"
 	ProjectSection(SolutionItems) = preProject
 		ApplicationCleanArchictecture_DDD.jpg = ApplicationCleanArchictecture_DDD.jpg
@@ -61,9 +54,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EB9BF502-2DE1-47EC-9C67-B89C25578A9F} = {ECC5CB80-FAF2-4C16-A71C-22BEF1BC72D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44D56648-84AE-4DAC-83D4-157E832FDAAB}

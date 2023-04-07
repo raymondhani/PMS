@@ -1,14 +1,20 @@
-using PMS.Api.Middleware;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using PMS.Api.Common.Errors;
 using PMS.Application;
 using PMS.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     // Add services to the container.
-    builder.Services.AddApplication();
-    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
+    
     builder.Services.AddControllers();
     
+    builder.Services.AddSingleton<ProblemDetailsFactory,PMSProblemDetailsFactory>();
+
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -24,7 +30,9 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
-    app.UseMiddleware<ErrorHandlingMiddleware>();
+    // app.UseMiddleware<ErrorHandlingMiddleware>();
+
+    app.UseExceptionHandler("/error");
 
     app.UseHttpsRedirection();
 
