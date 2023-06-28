@@ -1,9 +1,13 @@
-﻿namespace PMS.Application.Services.Authentication
+﻿using ErrorOr;
+using PMS.Application.Common.Errors;
+
+namespace PMS.Application.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        AuthenticationResult Login(string username, string password);
-        AuthenticationResult Register(string FirstName, string LastName, string Email, string Password);
+        ErrorOr<AuthenticationResult> Login(string username, string password);
+        ErrorOr<AuthenticationResult> Register(string FirstName, string LastName, string Email, string Password);
 
     }
 }
+    

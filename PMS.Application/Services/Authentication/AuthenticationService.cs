@@ -1,7 +1,9 @@
-﻿using PMS.Application.Common.Errors;
+﻿using ErrorOr;
 using PMS.Application.Common.Interfaces.Authentication;
 using PMS.Application.Common.Interfaces.Persistence;
 using PMS.Domain.Entities;
+using PMS.Domain.Common.Errors;
+using System.ComponentModel;
 
 namespace PMS.Application.Services.Authentication
 {
@@ -17,18 +19,18 @@ namespace PMS.Application.Services.Authentication
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
-        public AuthenticationResult Login(string email, string password)
+        public ErrorOr<AuthenticationResult> Login(string email, string password)
         {
             // 1 - Validate the user exists
             if(_userRepository.GetUserByEmail(email) is not User user)
             {
-                throw new Exception("User with given email does not exist");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // 2 - Validate the password is correct
             if(user.Password !=password)
             {
-                throw new Exception("Invalid Password");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // 3 - Create the JWT Token and return it to the user  
@@ -39,12 +41,12 @@ namespace PMS.Application.Services.Authentication
                 token);
         }
 
-        public AuthenticationResult Register(string firstName, string lastName, string email, string password)
+        public ErrorOr<AuthenticationResult> Register(string firstName, string lastName, string email, string password)
         {
             // 1- Validate the user doesn't exist
             if(_userRepository.GetUserByEmail(email) is not null) 
             {
-                throw new DuplicateEmailException();
+                return Errors.User.DuplicateEmail;
             }
 
             // 2 - create user (generate Unique ID)
