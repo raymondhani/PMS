@@ -1,10 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PMS.Application.Services.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PMS.Application
 {
@@ -12,8 +7,7 @@ namespace PMS.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            
+            services.AddMediatR(typeof(DependencyInjection).Assembly);            
             return services;
         }
     }

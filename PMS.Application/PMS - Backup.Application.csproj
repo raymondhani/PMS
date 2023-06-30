@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Authentication\Commands\Register\RegisterCommand.cs~RF1f2d33.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.15.2" />
     <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
