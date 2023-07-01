@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace PMS.Application.Queries.Login.Login
 {
-    public class LoginCommandHandler :
+    public class LoginQueryHandler :
         IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
     {
         public readonly IJwtTokenGenerator _jwtTokenGenerator;
         public readonly IUserRepository _userRepository;
 
-        public LoginCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
@@ -27,6 +27,7 @@ namespace PMS.Application.Queries.Login.Login
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
             // 1 - Validate the user exists
             if (_userRepository.GetUserByEmail(query.Email) is not User user)
             {
