@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using PMS.Api.Common.Errors;
+using PMS.Api;
 using PMS.Application;
 using PMS.Infrastructure;
 
@@ -9,11 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     builder.Services
         .AddApplication()
-        .AddInfrastructure(builder.Configuration);
+        .AddInfrastructure(builder.Configuration)
+        .AddPresentation();
     
-    builder.Services.AddControllers();
     
-    builder.Services.AddSingleton<ProblemDetailsFactory,PMSProblemDetailsFactory>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
