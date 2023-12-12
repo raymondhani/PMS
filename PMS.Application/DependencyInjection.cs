@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PMS.Application.Services.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using PMS.Application.Authentication.Commands.Register;
+using PMS.Application.Authentication.Common;
+using PMS.Application.Common.Behaviors;
+using System.Reflection;
 
 namespace PMS.Application
 {
@@ -12,7 +13,13 @@ namespace PMS.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
+
+            services.AddScoped(
+                typeof(IPipelineBehavior<,>),
+                typeof(ValidationBehavior<,>));
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
             
             return services;
         }
